@@ -3,6 +3,8 @@ package br.com.adaptadores.controller;
 import javax.validation.Valid;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -11,6 +13,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.adaptadores.controller.dto.RequiscaoDto;
 import br.com.adaptadores.service.ServicoService;
+import br.com.adaptadores.service.exceptions.ServicoServiceException;
 
 @Controller
 @RestController
@@ -21,9 +24,11 @@ public class BankController {
 	ServicoService service;
 	
 	@PostMapping(value = "/")	
-	public String gerarTelaSaldo(@RequestBody @Valid RequiscaoDto requisicao) {
+	public ResponseEntity<String>  gerarTelaSaldo(@RequestBody @Valid RequiscaoDto requisicao) throws ServicoServiceException {
 		service.cadastrarNovoCliente(requisicao.getTitular(), requisicao.getConta(), requisicao.getData(), requisicao.getCpf());
 		
-		return "tá ok 200!";		
+		return ResponseEntity
+	            .status(HttpStatus.OK)                 
+	            .body("200 OK");	
 	}
 }
