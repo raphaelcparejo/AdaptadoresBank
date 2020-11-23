@@ -9,5 +9,5 @@ import br.com.adaptadores.service.exceptions.ServicoServiceException;
 @Service
 public interface ServicoService {
 	
-	public void cadastrarNovoCliente(String titular, int conta, Date data, String cpf) throws ServicoServiceException;
+	public void cadastrarNovoCliente(String titular, String cpf) throws ServicoServiceException;
 }

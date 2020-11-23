@@ -25,7 +25,7 @@ public class BankController {
 	
 	@PostMapping(value = "/")	
 	public ResponseEntity<String>  gerarTelaSaldo(@RequestBody @Valid RequiscaoDto requisicao) throws ServicoServiceException {
-		service.cadastrarNovoCliente(requisicao.getTitular(), requisicao.getConta(), requisicao.getData(), requisicao.getCpf());
+		service.cadastrarNovoCliente(requisicao.getTitular(), requisicao.getCpf());
 		
 		return ResponseEntity
 	            .status(HttpStatus.OK)                 

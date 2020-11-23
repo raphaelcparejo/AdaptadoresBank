@@ -51,7 +51,7 @@ public class BankControllerTest {
 
 		// Arrange
 		RequiscaoDto requiscaoTestada = new RequiscaoDto("NomeTeste", 1, new Date(), "35566679992");
-		Mockito.doNothing().when(service).cadastrarNovoCliente("teste", 0, new Date(), "teste");
+		Mockito.doNothing().when(service).cadastrarNovoCliente("teste", "teste");
 
 		// Act
 		mvc.perform(MockMvcRequestBuilders.post("/").content(asJsonString(requiscaoTestada))
@@ -59,7 +59,7 @@ public class BankControllerTest {
 
 				// Assert
 				.andExpect(status().isOk());
-		Mockito.verify(service, Mockito.times(1)).cadastrarNovoCliente(null, 0, null, null);
+		Mockito.verify(service, Mockito.times(1)).cadastrarNovoCliente(null, null);
 		Mockito.verifyNoMoreInteractions(service);
 	}
 
@@ -90,8 +90,8 @@ public class BankControllerTest {
 
 		// Arrange
 		RequiscaoDto requiscaoTestada = new RequiscaoDto("NomeTeste", 1, new Date(), "35566679992");
-		Mockito.doThrow(new ServicoServiceException("olá", new Exception())).when(service).cadastrarNovoCliente(null, 0,
-				null, null);
+		Mockito.doThrow(new ServicoServiceException("olá", new Exception())).when(service).cadastrarNovoCliente(null,
+				null);
 
 		// Act
 		mvc.perform(MockMvcRequestBuilders.post("/").content(asJsonString(requiscaoTestada))
@@ -99,7 +99,7 @@ public class BankControllerTest {
 
 				// Assert
 				.andExpect(status().isBadGateway());
-		Mockito.verify(service, Mockito.times(1)).cadastrarNovoCliente("teste", 0, new Date(), "teste");
+		Mockito.verify(service, Mockito.times(1)).cadastrarNovoCliente("teste", "teste");
 		Mockito.verifyNoMoreInteractions(service);
 	}
 
