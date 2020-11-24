@@ -25,7 +25,20 @@ public class FakeMain {
 			new LinhaBuilder().nomearArquivo("nome.sql").incluirLinha(insert)
 			.inserirLinhaNoArquivoSql();
 		}
+		
+		
+		String criaTabelaHana = new HanaBuilder()
+				.incluirParametrizacoes(parametrizacoes)
+				.criarTabela();
+		new LinhaBuilder().nomearArquivo("nomeHana.sql").incluirLinha(criaTabelaHana)
+		.inserirLinhaNoArquivoSql();
+		
+		String criaProcHana = new ProcBuilder()
+				.incluirParametrizacoes(parametrizacoes)
+				.construirProc();
 
+		new LinhaBuilder().nomearArquivo("nomeProcHana.sql").incluirLinha(criaTabelaHana)
+		.inserirLinhaNoArquivoSql();
 	}
 
 }
